@@ -8,13 +8,14 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 # A dictionary to hold the file paths for easy access
+dataset_path = "datasets"
 file_paths = {
-    "Original": "alzheimers_disease_data.csv",
-    "Gemini": "gemini-synthetic-dataset.csv",
-    "Claude": "claude_dataset.csv",
-    "ChatGPT": "chat_gpt_dataset.csv",
-    "Copilot": "copilot_dataset.csv",
-    "DuckDuckGo": "duckduck-synthetic-dataset.csv"
+    "Original": f"{dataset_path}/alzheimers_disease_data.csv",
+    "Gemini": f"{dataset_path}/gemini-synthetic-dataset.csv",
+    "Claude": f"{dataset_path}/claude_dataset.csv",
+    "ChatGPT": f"{dataset_path}/chat_gpt_dataset.csv",
+    "Copilot": f"{dataset_path}/copilot_dataset.csv",
+    "DuckDuckGo": f"{dataset_path}/duckduck-synthetic-dataset.csv"
 }
 
 # An empty dictionary to store the final accuracy results
