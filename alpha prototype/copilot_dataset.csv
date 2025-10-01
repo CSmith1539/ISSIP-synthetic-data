@@ -1,0 +1,151 @@
+PatientID,Age,Gender,Ethnicity,EducationLevel,MMSE,APOE4,CDR,DoctorID,Diagnosis
+PID_001,74,Male,African American,16,25.0,1,0.5,DOC_H,False
+PID_002,93,Male,African American,15,22.8,1,1.0,DOC_A,True
+PID_003,80,Male,Hispanic,14,24.1,0,0.5,DOC_J,False
+PID_004,86,Female,Hispanic,17,26.2,2,0.5,DOC_D,False
+PID_005,74,Male,Hispanic,13,30.0,1,0.0,DOC_D,False
+PID_006,75,Male,African American,14,27.6,1,0.0,DOC_C,False
+PID_007,91,Female,Asian,16,24.0,2,0.5,DOC_C,False
+PID_008,84,Female,African American,20,23.0,1,0.5,DOC_D,False
+PID_009,83,Female,Caucasian,13,23.6,1,0.5,DOC_A,False
+PID_010,93,Female,Caucasian,19,20.4,2,1.0,DOC_B,True
+PID_011,81,Male,Asian,13,20.4,1,1.0,DOC_I,True
+PID_012,94,Female,Asian,16,22.2,1,1.0,DOC_J,True
+PID_013,74,Female,African American,18,26.5,1,0.5,DOC_B,False
+PID_014,69,Female,Asian,19,30.0,1,0.0,DOC_E,False
+PID_015,75,Female,African American,12,30.0,1,0.0,DOC_I,False
+PID_016,88,Female,Caucasian,17,25.8,0,0.5,DOC_I,False
+PID_017,80,Male,Caucasian,12,30.0,1,0.0,DOC_H,False
+PID_018,72,Male,Caucasian,13,30.0,1,0.0,DOC_A,False
+PID_019,84,Female,Caucasian,12,20.2,1,1.0,DOC_A,True
+PID_020,78,Female,Caucasian,16,29.1,1,0.0,DOC_I,False
+PID_021,81,Female,African American,20,27.6,2,0.0,DOC_H,False
+PID_022,79,Male,Caucasian,17,25.5,1,0.5,DOC_J,False
+PID_023,76,Female,African American,12,23.3,1,0.5,DOC_I,False
+PID_024,80,Male,Caucasian,12,27.5,0,0.0,DOC_G,False
+PID_025,61,Male,African American,13,24.6,1,0.5,DOC_C,False
+PID_026,83,Female,Caucasian,20,25.3,1,0.5,DOC_C,False
+PID_027,68,Male,Caucasian,14,26.9,1,0.5,DOC_B,False
+PID_028,79,Female,Caucasian,12,23.1,1,0.5,DOC_E,False
+PID_029,79,Female,African American,16,29.2,1,0.0,DOC_C,False
+PID_030,93,Male,Caucasian,18,23.3,1,0.5,DOC_F,False
+PID_031,71,Male,Hispanic,17,28.2,0,0.0,DOC_B,False
+PID_032,64,Male,Caucasian,12,30.0,1,0.0,DOC_C,False
+PID_033,81,Female,Caucasian,16,25.8,1,0.5,DOC_E,False
+PID_034,93,Female,Hispanic,16,24.5,0,0.5,DOC_A,False
+PID_035,90,Male,Caucasian,17,26.0,1,0.5,DOC_A,False
+PID_036,71,Male,Caucasian,14,29.2,0,0.0,DOC_J,False
+PID_037,77,Female,Caucasian,16,27.3,1,0.0,DOC_I,False
+PID_038,78,Male,Caucasian,18,30.0,1,0.0,DOC_G,False
+PID_039,82,Female,African American,16,28.7,0,0.0,DOC_A,False
+PID_040,81,Female,Caucasian,16,25.6,1,0.5,DOC_H,False
+PID_041,85,Male,Caucasian,16,22.7,1,1.0,DOC_C,True
+PID_042,88,Male,Caucasian,14,26.0,1,0.5,DOC_H,False
+PID_043,73,Male,Hispanic,12,27.9,1,0.0,DOC_E,False
+PID_044,83,Female,Caucasian,16,29.7,0,0.0,DOC_A,False
+PID_045,60,Male,Caucasian,20,30.0,1,0.0,DOC_G,False
+PID_046,92,Male,African American,12,25.5,1,0.5,DOC_E,False
+PID_047,72,Male,African American,14,27.6,1,0.0,DOC_F,False
+PID_048,81,Female,Caucasian,15,23.6,0,0.5,DOC_F,False
+PID_049,94,Female,Caucasian,12,22.7,1,1.0,DOC_H,True
+PID_050,68,Female,Caucasian,12,29.6,0,0.0,DOC_I,False
+PID_051,83,Female,Caucasian,19,21.1,1,1.0,DOC_B,True
+PID_052,61,Female,Caucasian,13,30.0,0,0.0,DOC_I,False
+PID_053,81,Female,Caucasian,19,30.0,2,0.0,DOC_J,False
+PID_054,74,Female,Caucasian,18,22.3,0,1.0,DOC_I,True
+PID_055,84,Male,Caucasian,13,21.7,0,1.0,DOC_J,True
+PID_056,72,Male,Hispanic,17,28.2,1,0.0,DOC_J,False
+PID_057,74,Female,Asian,17,25.7,1,0.5,DOC_G,False
+PID_058,88,Female,Caucasian,14,25.1,1,0.5,DOC_A,False
+PID_059,79,Male,Hispanic,13,26.0,1,0.5,DOC_G,False
+PID_060,92,Female,African American,12,21.0,1,1.0,DOC_J,True
+PID_061,90,Female,Caucasian,17,27.2,1,0.0,DOC_E,False
+PID_062,65,Female,Caucasian,16,30.0,1,0.0,DOC_F,False
+PID_063,78,Female,Caucasian,20,25.0,1,0.5,DOC_J,False
+PID_064,92,Male,Caucasian,12,27.4,0,0.0,DOC_G,False
+PID_065,73,Female,African American,18,26.1,1,0.5,DOC_E,False
+PID_066,76,Male,Caucasian,16,23.7,0,0.5,DOC_G,False
+PID_067,76,Male,Caucasian,16,27.3,0,0.0,DOC_I,False
+PID_068,78,Female,Hispanic,13,27.3,2,0.0,DOC_C,False
+PID_069,93,Female,Asian,14,24.7,0,0.5,DOC_H,False
+PID_070,69,Female,Caucasian,18,29.9,0,0.0,DOC_B,False
+PID_071,67,Male,Hispanic,17,29.9,2,0.0,DOC_G,False
+PID_072,65,Female,Hispanic,13,30.0,2,0.0,DOC_B,False
+PID_073,72,Female,Hispanic,17,26.2,1,0.5,DOC_D,False
+PID_074,81,Male,Caucasian,13,24.1,1,0.5,DOC_G,False
+PID_075,77,Female,African American,13,28.5,1,0.0,DOC_C,False
+PID_076,61,Female,Caucasian,13,30.0,1,0.0,DOC_B,False
+PID_077,81,Female,African American,14,27.9,0,0.0,DOC_J,False
+PID_078,61,Female,Hispanic,13,25.5,0,0.5,DOC_G,False
+PID_079,82,Male,African American,15,24.3,0,0.5,DOC_A,False
+PID_080,68,Female,Asian,20,30.0,1,0.0,DOC_H,False
+PID_081,73,Male,Hispanic,17,28.8,0,0.0,DOC_C,False
+PID_082,67,Female,Asian,12,29.3,0,0.0,DOC_B,False
+PID_083,73,Male,Caucasian,19,29.2,0,0.0,DOC_C,False
+PID_084,70,Female,Caucasian,18,30.0,2,0.0,DOC_E,False
+PID_085,76,Female,Caucasian,14,30.0,0,0.0,DOC_H,False
+PID_086,68,Male,Hispanic,12,24.5,1,0.5,DOC_J,False
+PID_087,78,Male,Caucasian,16,23.4,0,0.5,DOC_G,False
+PID_088,65,Male,Caucasian,15,25.0,1,0.5,DOC_G,False
+PID_089,86,Female,Caucasian,19,22.9,1,1.0,DOC_G,True
+PID_090,70,Female,Caucasian,12,28.1,0,0.0,DOC_H,False
+PID_091,70,Female,Hispanic,12,28.6,1,0.0,DOC_A,False
+PID_092,72,Female,Hispanic,15,23.8,0,0.5,DOC_D,False
+PID_093,84,Female,Caucasian,19,20.5,1,1.0,DOC_F,True
+PID_094,77,Male,Hispanic,16,24.7,0,0.5,DOC_I,False
+PID_095,67,Female,Caucasian,13,30.0,1,0.0,DOC_B,False
+PID_096,84,Male,Caucasian,17,27.9,2,0.0,DOC_A,False
+PID_097,81,Female,African American,16,30.0,0,0.0,DOC_J,False
+PID_098,67,Male,Caucasian,13,28.5,1,0.0,DOC_B,False
+PID_099,76,Female,Caucasian,14,28.9,1,0.0,DOC_G,False
+PID_100,60,Female,African American,20,30.0,2,0.0,DOC_C,False
+PID_101,79,Male,Caucasian,18,25.0,1,0.5,DOC_J,False
+PID_102,83,Female,Caucasian,18,26.4,1,0.5,DOC_B,False
+PID_103,69,Female,Caucasian,17,29.8,1,0.0,DOC_G,False
+PID_104,82,Male,Caucasian,19,23.3,1,0.5,DOC_B,False
+PID_105,66,Male,Caucasian,15,30.0,0,0.0,DOC_C,False
+PID_106,73,Female,Caucasian,19,27.3,0,0.0,DOC_G,False
+PID_107,67,Female,African American,15,28.8,1,0.0,DOC_D,False
+PID_108,88,Female,Asian,19,22.0,1,1.0,DOC_A,True
+PID_109,88,Male,Asian,20,22.5,0,1.0,DOC_E,True
+PID_110,63,Female,African American,14,23.9,1,0.5,DOC_I,False
+PID_111,68,Female,African American,14,28.5,1,0.0,DOC_H,False
+PID_112,86,Female,Caucasian,13,30.0,2,0.0,DOC_I,False
+PID_113,73,Female,Caucasian,14,24.9,0,0.5,DOC_J,False
+PID_114,63,Male,Caucasian,14,30.0,0,0.0,DOC_I,False
+PID_115,74,Female,Caucasian,16,30.0,0,0.0,DOC_G,False
+PID_116,88,Male,Caucasian,16,23.2,1,0.5,DOC_D,False
+PID_117,81,Female,Caucasian,13,25.9,0,0.5,DOC_E,False
+PID_118,77,Female,Asian,17,26.3,1,0.5,DOC_A,False
+PID_119,85,Female,Hispanic,16,29.3,1,0.0,DOC_A,False
+PID_120,64,Female,Caucasian,17,30.0,1,0.0,DOC_C,False
+PID_121,93,Male,Caucasian,12,26.4,1,0.5,DOC_H,False
+PID_122,95,Male,Caucasian,16,23.9,0,0.5,DOC_B,False
+PID_123,77,Female,Hispanic,20,26.3,1,0.5,DOC_D,False
+PID_124,66,Male,Hispanic,13,29.6,1,0.0,DOC_B,False
+PID_125,85,Female,Caucasian,12,24.0,1,0.5,DOC_E,False
+PID_126,76,Male,African American,20,23.2,1,0.5,DOC_I,False
+PID_127,81,Female,Caucasian,20,27.8,0,0.0,DOC_A,False
+PID_128,88,Male,Caucasian,20,20.6,1,1.0,DOC_E,True
+PID_129,71,Female,Caucasian,17,27.1,0,0.0,DOC_I,False
+PID_130,71,Female,Caucasian,19,26.7,1,0.5,DOC_A,False
+PID_131,72,Female,Hispanic,12,29.2,1,0.0,DOC_I,False
+PID_132,71,Female,African American,15,30.0,0,0.0,DOC_H,False
+PID_133,80,Female,Caucasian,12,29.0,1,0.0,DOC_D,False
+PID_134,82,Female,African American,19,27.3,0,0.0,DOC_J,False
+PID_135,85,Male,Hispanic,12,23.4,1,0.5,DOC_E,False
+PID_136,95,Female,Hispanic,14,22.5,1,1.0,DOC_E,True
+PID_137,92,Female,Caucasian,15,22.8,2,1.0,DOC_F,True
+PID_138,83,Male,Caucasian,19,24.2,1,0.5,DOC_G,False
+PID_139,69,Male,Caucasian,17,27.2,1,0.0,DOC_H,False
+PID_140,74,Female,Caucasian,18,26.1,0,0.5,DOC_H,False
+PID_141,86,Female,Caucasian,19,23.6,1,0.5,DOC_B,False
+PID_142,84,Male,African American,13,27.6,0,0.0,DOC_I,False
+PID_143,71,Female,Caucasian,19,25.2,1,0.5,DOC_G,False
+PID_144,77,Male,Caucasian,14,24.8,2,0.5,DOC_D,False
+PID_145,87,Male,Caucasian,18,20.6,0,1.0,DOC_D,True
+PID_146,75,Female,Caucasian,14,30.0,0,0.0,DOC_H,False
+PID_147,63,Female,Caucasian,18,27.4,2,0.0,DOC_D,False
+PID_148,90,Male,Caucasian,13,25.7,1,0.5,DOC_F,False
+PID_149,80,Female,Caucasian,17,27.2,2,0.0,DOC_E,False
+PID_150,76,Female,Caucasian,14,30.0,1,0.0,DOC_C,False
