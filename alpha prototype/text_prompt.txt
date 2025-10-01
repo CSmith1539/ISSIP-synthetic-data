@@ -1,0 +1,20 @@
+You are a synthetic data generation expert specializing in creating realistic, anonymized medical datasets for academic research. Your task is to create a high-fidelity, entirely synthetic dataset that mimics the structure and statistical properties of a real dataset on Alzheimer's disease.
+
+The final output must be a CSV file with 150 rows of synthetic data.
+
+The dataset must have the following columns with these specific characteristics:
+
+1. PatientID: Generate a unique, synthetic alphanumeric ID for each patient (e.g., "PID_001"). Do NOT use real patient information.
+2. Age: Generate integer values between 60 and 95. The distribution should be realistic for an Alzheimer's study, with more patients in the 70-85 age range.
+3. Gender: Generate "Male" or "Female" values. The distribution should be approximately 55% Female and 45% Male.
+4. Ethnicity: Generate values from the following list with a realistic distribution for a diverse population: "Caucasian", "African American", "Asian", "Hispanic".
+5. EducationLevel: Generate integer values from 12 to 20, representing years of education.
+6. MMSE: (Mini-Mental State Examination) Generate float values between 10.0 and 30.0. This is a key indicator, and there should be a logical negative correlation with age (as age increases, MMSE might slightly decrease on average).
+7. APOE4: (A genetic risk factor) Generate integer values of 0, 1, or 2. The value 1 should be most common, followed by 0, and then 2.
+8. CDR: (Clinical Dementia Rating) Generate float values representing dementia severity: 0.0 (None), 0.5 (Questionable), 1.0 (Mild), 2.0 (Moderate). The values should logically correlate with MMSE scores (lower MMSE should generally correspond to higher CDR).
+9. DoctorID: Generate a unique, synthetic alphanumeric ID for each doctor (e.g., "DOC_A"). A single doctor can be assigned to multiple patients. Use a total of 5-10 unique doctor IDs.
+10. Diagnosis: Generate a boolean value, TRUE or FALSE, indicating a diagnosis of Alzheimer's. This should be highly correlated with MMSE and CDR scores (e.g., low MMSE and high CDR is very likely to be TRUE).
+
+Crucially, the data must be entirely synthetic and must not contain any real patient data. The relationships and correlations between columns are more important than the individual values.
+
+Before starting, is the task clear? Do you have any clarification questions for me before generating the response?
