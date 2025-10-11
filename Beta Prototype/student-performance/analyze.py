@@ -92,7 +92,7 @@ vae.compile(optimizer=tf.keras.optimizers.Adam(1e-3))
 vae.fit(data_scaled, epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=1)
 
 # Generate data
-n_samples = 100  # number of synthetic samples to generate
+n_samples = 1000  # number of synthetic samples to generate
 z_new = np.random.normal(size=(n_samples, LATENT_DIM))
 generated_scaled = decoder.predict(z_new)
 generated = scaler.inverse_transform(generated_scaled)
