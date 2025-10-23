@@ -43,8 +43,6 @@ def preprocess_csv(
 
     return df
 
-
-# Example usage:
 if __name__ == "__main__":
     df = preprocess_csv(
         input_path="student-performance/data/student-merged.csv",

@@ -172,7 +172,7 @@ def generate_visualizations(df_orig, df_synth, ml_results_df):
     plt.xlabel('Final Grade (G3)')
     plt.ylabel('Density')
     plt.legend()
-    plt.savefig('g3_distribution_comparison.png')
+    plt.savefig('testing/g3_distribution_comparison.png')
     print("✅ Saved G3 distribution plot to g3_distribution_comparison.png")
 
     # 2. Bar Chart for ML Accuracy
@@ -193,7 +193,7 @@ def generate_visualizations(df_orig, df_synth, ml_results_df):
                     ha='center', va='center', fontsize=10, color='black', xytext=(0, 5),
                     textcoords='offset points')
 
-    plt.savefig('ml_accuracy_comparison.png')
+    plt.savefig('testing/ml_accuracy_comparison.png')
     print("✅ Saved ML accuracy bar chart to ml_accuracy_comparison.png")
 
 # --------------------------------------------------------------------------------------
