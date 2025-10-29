@@ -1,0 +1,2 @@
+p:BATCH_SIZE,p:EPOCHS,p:LATENT_DIM,objective,job_id,m:timestamp_submit,m:timestamp_gather
+41,50,31,104.49999999999946,0,0.05643129348754883,11.85526418685913

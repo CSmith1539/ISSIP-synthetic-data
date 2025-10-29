@@ -60,7 +60,7 @@ def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
     data_scaled = scaler.fit_transform(df.values)
     input_dim = data_scaled.shape[1]
 
-    print(f"Data loaded: {df.shape[0]} rows, {input_dim} features")
+    #print(f"Data loaded: {df.shape[0]} rows, {input_dim} features")
 
     # Encoder
     inputs = layers.Input(shape=(input_dim,))
@@ -88,7 +88,7 @@ def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
     vae.compile(optimizer=tf.keras.optimizers.Adam(1e-3))
 
     # Train
-    vae.fit(data_scaled, epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=1)
+    vae.fit(data_scaled, epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=0)
 
     # Generate data
     n_samples = 1000  # number of synthetic samples to generate
@@ -115,7 +115,8 @@ def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
     # Save to CSV
     generated_df.to_csv("output/synthetic_output.csv", index=False)
 
-run(LATENT_DIM=4)
-print("Script completed")
+if __name__ == "__main__":
+    run(LATENT_DIM=4)
+    print("Script completed")
 
 

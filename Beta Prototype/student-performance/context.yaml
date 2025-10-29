@@ -1,0 +1,64 @@
+calls:
+- max_evals: 30
+  timeout: null
+search:
+  acq_func: UCBd
+  acq_optimizer: auto
+  acq_optimizer_freq: 10
+  evaluator:
+    num_workers: 1
+    type: ThreadPoolEvaluator
+  filter_duplicated: true
+  filter_failures: min
+  initial_point_generator: random
+  initial_points: null
+  kappa: 1.96
+  kwargs: {}
+  log_dir: .
+  max_failures: 100
+  moo_lower_bounds: null
+  moo_scalarization_strategy: Chebyshev
+  moo_scalarization_weight: null
+  multi_point_strategy: cl_max
+  n_initial_points: 10
+  n_jobs: 1
+  n_points: 10000
+  objective_scaler: auto
+  problem:
+    conditions: []
+    forbiddens: []
+    hyperparameters:
+    - default: 30
+      log: false
+      lower: 10
+      name: BATCH_SIZE
+      q: null
+      type: uniform_int
+      upper: 50
+    - default: 55
+      log: false
+      lower: 10
+      name: EPOCHS
+      q: null
+      type: uniform_int
+      upper: 100
+    - default: 34
+      log: false
+      lower: 4
+      name: LATENT_DIM
+      q: null
+      type: uniform_int
+      upper: 64
+    json_format_version: 0.4
+    python_module_version: 0.6.1
+  random_state: null
+  scheduler: null
+  stopper: null
+  surrogate_model: ET
+  surrogate_model_kwargs: null
+  sync_communication: false
+  type: CBO
+  update_prior: false
+  update_prior_quantile: 0.1
+  verbose: 0
+  xi: 0.001

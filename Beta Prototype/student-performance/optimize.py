@@ -1,51 +1,20 @@
-from deephyper.hpo import HpProblem, CBO
+from deephyper.problem import HpProblem
 from deephyper.evaluator import Evaluator
+from deephyper.search.hps import CBO
 
+from vae import generate_data
+from run_tests import get_optimization_score
 
-def run(job):
-    x = job.parameters["x"]
-    b = job.parameters["b"]
-    function = job.parameters["function"]
+problem = HpProblem()
+problem.add_hyperparameter((4, 64), "LATENT_DIM")
+problem.add_hyperparameter((10, 100), "EPOCHS")
+problem.add_hyperparameter((10, 50), "BATCH_SIZE")
 
-    if function == "linear":
-        y = x + b
-    elif function == "cubic":
-        y = x**3 + b
-
-    return y
-
-
-def optimize():
-    problem = HpProblem()
-    problem.add_hyperparameter((-10.0, 10.0), "x")
-    problem.add_hyperparameter((0, 10), "b")
-    problem.add_hyperparameter(["linear", "cubic"], "function")
-
-    evaluator = Evaluator.create(run, method="process",
-        method_kwargs={
-            "num_workers": 2,
-        },
-    )
-
-    search = CBO(
-        problem, 
-        random_state=42, 
-        solution_selection="argmax_obs",
-    )
-    results = search.search(evaluator, max_evals=100)
-
-    return results
-
-def test_opt():
-    return 5
+def run(config):
+    generate_data(**config)
+    return get_optimization_score()
 
 if __name__ == "__main__":
-    results = optimize()
-    print(results)
-
-    row = results.iloc[-1]
-    print("\nOptimum values")
-    print("function:", row["sol.p:function"])
-    print("x:", row["sol.p:x"])
-    print("b:", row["sol.p:b"])
-    print("y:", row["sol.objective"])
+    evaluator = Evaluator.create(run, method="thread")
+    search = CBO(problem, evaluator)
+    results = search.search(max_evals=30)

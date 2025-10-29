@@ -14,8 +14,8 @@ import warnings
 warnings.filterwarnings("ignore") # Suppress minor sklearn warnings
 
 # Define file paths
-ORIGINAL_PATH = '../data/processed_data.csv'
-SYNTHETIC_PATH = '../output/synthetic_output.csv'
+ORIGINAL_PATH = 'data/processed_data.csv'
+SYNTHETIC_PATH = 'output/synthetic_output.csv'
 
 # --------------------------------------------------------------------------------------
 # PART A: Data Loading and Preprocessing
@@ -196,12 +196,25 @@ def generate_visualizations(df_orig, df_synth, ml_results_df):
     plt.savefig('testing/ml_accuracy_comparison.png')
     print("✅ Saved ML accuracy bar chart to ml_accuracy_comparison.png")
 
+def get_optimization_score():
+    models = [
+        (LogisticRegression, "Logistic Regression", {'random_state': 42}),
+        (RandomForestClassifier, "Random Forest", {'random_state': 42}),
+        (KNeighborsClassifier, "K-Nearest Neighbors", {})
+    ]
+    
+    results = [run_ml_utility_test(mc, X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test, name, **kwargs) for mc, name, kwargs in models]
+    df_results = pd.DataFrame(results)
+    
+    return 1 / max(df_results['Acc_Gap'])
+
+
 # --------------------------------------------------------------------------------------
 # FINAL EXECUTION
 # --------------------------------------------------------------------------------------
-test_fidelity(df_orig_raw, df_synth_raw)
-test_privacy(X_orig_proc, X_synth_proc)
-ml_results = test_utility_all_models(X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test)
-generate_visualizations(df_orig_raw, df_synth_raw, ml_results)
-
+#test_fidelity(df_orig_raw, df_synth_raw)
+#test_privacy(X_orig_proc, X_synth_proc)
+#ml_results = test_utility_all_models(X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test)
+#generate_visualizations(df_orig_raw, df_synth_raw, ml_results)
+get_optimization_score()
 print("\n\nScript finished.")
