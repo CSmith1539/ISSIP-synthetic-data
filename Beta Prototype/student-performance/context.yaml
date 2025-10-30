@@ -42,13 +42,13 @@ search:
       q: null
       type: uniform_int
       upper: 100
-    - default: 34
+    - default: 14
       log: false
       lower: 4
       name: LATENT_DIM
       q: null
       type: uniform_int
-      upper: 64
+      upper: 24
     json_format_version: 0.4
     python_module_version: 0.6.1
   random_state: null

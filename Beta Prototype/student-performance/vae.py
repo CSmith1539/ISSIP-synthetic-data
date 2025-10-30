@@ -18,11 +18,12 @@ one_hot_groups = [
 
 # Vae subclass
 class VAE(tf.keras.Model):
-    def __init__(self, encoder, decoder, kl_weight=0.001, **kwargs):
+    def __init__(self, encoder, decoder, binary_mask, kl_weight=0.001, **kwargs):
         super().__init__(**kwargs)
         self.encoder = encoder
         self.decoder = decoder
         self.kl_weight = kl_weight
+        self.binary_mask = tf.constant(binary_mask, dtype=tf.bool)
 
     def call(self, x):
         z_mean, z_log_var, z = self.encoder(x)
@@ -30,18 +31,45 @@ class VAE(tf.keras.Model):
         return x_recon, z_mean, z_log_var
 
     def train_step(self, data):
-        x = data  # just use the input
+        x = data
         with tf.GradientTape() as tape:
             x_recon, z_mean, z_log_var = self(x, training=True)
-            recon_loss = tf.reduce_mean(tf.square(x - x_recon))
-            kl_loss = -0.5 * tf.reduce_mean(1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
+
+            # Split binary vs numeric components
+            x_bin = tf.boolean_mask(x, self.binary_mask, axis=1)
+            x_recon_bin = tf.boolean_mask(x_recon, self.binary_mask, axis=1)
+
+            x_num = tf.boolean_mask(x, ~self.binary_mask, axis=1)
+            x_recon_num = tf.boolean_mask(x_recon, ~self.binary_mask, axis=1)
+
+            # Compute binary and numeric reconstruction losses
+            recon_bin = tf.reduce_mean(
+                tf.keras.losses.binary_crossentropy(x_bin, x_recon_bin)
+            )
+            recon_num = tf.reduce_mean(tf.square(x_num - x_recon_num))
+
+            recon_loss = recon_bin + recon_num
+
+            # KL divergence
+            kl_loss = -0.5 * tf.reduce_mean(
+                1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var)
+            )
+
             total_loss = recon_loss + self.kl_weight * kl_loss
 
         grads = tape.gradient(total_loss, self.trainable_variables)
         self.optimizer.apply_gradients(zip(grads, self.trainable_variables))
-        return {"loss": total_loss, "recon_loss": recon_loss, "kl_loss": kl_loss}
 
-def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
+        return {
+            "loss": total_loss,
+            "recon_loss": recon_loss,
+            "recon_bin": recon_bin,
+            "recon_num": recon_num,
+            "kl_loss": kl_loss,
+        }
+
+def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32, kl_weight=0.001):
+    print(f'Running with latent_dim={LATENT_DIM}, epochs={EPOCHS}, batch_size={BATCH_SIZE}')
     # Load Data
     df = pd.read_csv(CSV_FILE)
 
@@ -53,6 +81,9 @@ def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
 
     # Fill missing values (mean imputation)
     df = df.fillna(df.mean())
+
+    # Detect binary columns
+    binary_mask = np.array([(df[col].dropna().isin([0, 1]).all()) for col in df.columns])
 
     # Normalize all columns to [0, 1]
     scaler = MinMaxScaler()
@@ -80,11 +111,11 @@ def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
     # Decoder
     latent_inputs = layers.Input(shape=(LATENT_DIM,))
     x = layers.Dense(64, activation='relu')(latent_inputs)
-    outputs = layers.Dense(input_dim, activation='sigmoid')(x)
+    outputs = layers.Dense(input_dim, activation='sigmoid')(x) # Replaced linear
     decoder = models.Model(latent_inputs, outputs, name="decoder")
 
     # Set up VAE
-    vae = VAE(encoder, decoder, kl_weight=0.001)
+    vae = VAE(encoder, decoder, binary_mask, kl_weight)
     vae.compile(optimizer=tf.keras.optimizers.Adam(1e-3))
 
     # Train
@@ -110,13 +141,14 @@ def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32):
     # Round all other values (continuous features)
     generated_df = generated_df.round().astype(int)
 
-    print(generated_df.head())
+    #print(generated_df.head())
 
     # Save to CSV
     generated_df.to_csv("output/synthetic_output.csv", index=False)
 
 if __name__ == "__main__":
-    run(LATENT_DIM=4)
+    generate_data(LATENT_DIM=8, EPOCHS=30, BATCH_SIZE=24, kl_weight=0.01)
+
     print("Script completed")
 
 

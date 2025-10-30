@@ -26,7 +26,7 @@ def load_and_preprocess_data():
     Loads both datasets, defines features/target, and prepares all necessary
     processed components for the tests.
     """
-    print("Loading and preprocessing data...")
+    #print("Loading and preprocessing data...")
     df_orig = pd.read_csv(ORIGINAL_PATH, sep=',')
     df_synth = pd.read_csv(SYNTHETIC_PATH, sep=',')
 
@@ -70,7 +70,7 @@ def load_and_preprocess_data():
     X_synth_proc = preprocessor.transform(X_synth)
     X_test_proc = preprocessor.transform(X_test)
 
-    print("✅ Data setup complete.")
+    #print("✅ Data setup complete.")
     return df_orig, df_synth, X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test
 
 # Load all data components
@@ -197,6 +197,16 @@ def generate_visualizations(df_orig, df_synth, ml_results_df):
     print("✅ Saved ML accuracy bar chart to ml_accuracy_comparison.png")
 
 def get_optimization_score():
+    df_orig_raw, df_synth_raw, X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test = load_and_preprocess_data()
+
+    stats_orig = df_orig_raw['G3'].describe()
+    stats_synth = df_synth_raw['G3'].describe()
+
+    comparison_df = pd.DataFrame({'Original': stats_orig, 'Synthetic': stats_synth})
+    comparison_df['Deviation (%)'] = abs(comparison_df['Synthetic'] - comparison_df['Original']) / comparison_df['Original'] * 100
+
+    mean_deviation = comparison_df.loc['mean', 'Deviation (%)']
+
     models = [
         (LogisticRegression, "Logistic Regression", {'random_state': 42}),
         (RandomForestClassifier, "Random Forest", {'random_state': 42}),
@@ -205,16 +215,18 @@ def get_optimization_score():
     
     results = [run_ml_utility_test(mc, X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test, name, **kwargs) for mc, name, kwargs in models]
     df_results = pd.DataFrame(results)
+
+    score = 100 - (sum(df_results['Acc_Gap']) * 50) - mean_deviation * 5
+    print(f'Score: {score}, mean: {mean_deviation}')
     
-    return 1 / max(df_results['Acc_Gap'])
+    return score
 
 
 # --------------------------------------------------------------------------------------
 # FINAL EXECUTION
 # --------------------------------------------------------------------------------------
-#test_fidelity(df_orig_raw, df_synth_raw)
-#test_privacy(X_orig_proc, X_synth_proc)
-#ml_results = test_utility_all_models(X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test)
-#generate_visualizations(df_orig_raw, df_synth_raw, ml_results)
-get_optimization_score()
-print("\n\nScript finished.")
+if __name__ == "__main__":
+    test_fidelity(df_orig_raw, df_synth_raw)
+    test_privacy(X_orig_proc, X_synth_proc)
+    ml_results = test_utility_all_models(X_orig_proc, y_orig, X_synth_proc, y_synth, X_test_proc, y_test)
+    generate_visualizations(df_orig_raw, df_synth_raw, ml_results)
