@@ -69,7 +69,7 @@ class VAE(tf.keras.Model):
         }
 
 def generate_data(LATENT_DIM=8, EPOCHS=50, BATCH_SIZE=32, kl_weight=0.001):
-    print(f'Running with latent_dim={LATENT_DIM}, epochs={EPOCHS}, batch_size={BATCH_SIZE}')
+    print(f'Running with latent_dim={LATENT_DIM}, epochs={EPOCHS}, batch_size={BATCH_SIZE}, kl_weight={kl_weight}')
     # Load Data
     df = pd.read_csv(CSV_FILE)
 

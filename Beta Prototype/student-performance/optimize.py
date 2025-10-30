@@ -8,7 +8,7 @@ from run_tests import get_optimization_score
 problem = HpProblem()
 problem.add_hyperparameter((4, 24), "LATENT_DIM")
 problem.add_hyperparameter((10, 100), "EPOCHS")
-problem.add_hyperparameter((10, 50), "BATCH_SIZE")
+problem.add_hyperparameter((0.001, 0.05), "kl_weight")
 
 def run(config):
     print(f'New test:')

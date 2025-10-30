@@ -28,13 +28,6 @@ search:
     conditions: []
     forbiddens: []
     hyperparameters:
-    - default: 30
-      log: false
-      lower: 10
-      name: BATCH_SIZE
-      q: null
-      type: uniform_int
-      upper: 50
     - default: 55
       log: false
       lower: 10
@@ -49,6 +42,13 @@ search:
       q: null
       type: uniform_int
       upper: 24
+    - default: 0.0255
+      log: false
+      lower: 0.001
+      name: kl_weight
+      q: null
+      type: uniform_float
+      upper: 0.05
     json_format_version: 0.4
     python_module_version: 0.6.1
   random_state: null
