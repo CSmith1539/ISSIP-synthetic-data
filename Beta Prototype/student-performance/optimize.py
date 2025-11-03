@@ -3,7 +3,7 @@ from deephyper.evaluator import Evaluator
 from deephyper.search.hps import CBO
 
 from vae import generate_data
-from run_tests import get_optimization_score
+from scoring import get_optimization_score
 
 problem = HpProblem()
 problem.add_hyperparameter((4, 24), "LATENT_DIM")
