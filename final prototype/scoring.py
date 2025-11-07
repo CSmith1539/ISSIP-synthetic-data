@@ -7,9 +7,6 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 import warnings
 
-ORIGINAL_PATH = "data/processed_data.csv"
-SYNTHETIC_PATH = "output/synthetic_output.csv"
-
 warnings.filterwarnings("ignore") # Suppress minor sklearn warnings
 
 # Column information
@@ -58,12 +55,8 @@ def column_distribution_score(df_orig, df_synth, num_cols, cat_cols):
         scores.append(1 - jsd)
     return np.mean(scores) if scores else 0.0
 
-# Measure correlations in the data
+# Measure preservation of correlations in the data
 def correlation_score(df_orig, df_synth, num_cols):
-    """
-    Measures how well inter-feature correlations are preserved.
-    Uses Pearson correlation on numeric columns.
-    """
     if len(num_cols) < 2:
         return 1.0  # trivial case
 
@@ -73,11 +66,8 @@ def correlation_score(df_orig, df_synth, num_cols):
     return 1 - np.mean(diff)  # smaller difference → higher score
 
 # Distinguishibility testing, ie, can a model accurately predict if the data is synthetic
+# Closer the model's guesses get to 50/50 guesses, the higher the score
 def indistinguishability_score(X_orig, X_synth):
-    """
-    Train a classifier to distinguish real from synthetic samples.
-    Perfect indistinguishability → AUC = 0.5 → score = 1.0
-    """
     n = min(len(X_orig), len(X_synth))
     X_orig, X_synth = X_orig[:n], X_synth[:n]
 
@@ -97,29 +87,28 @@ def indistinguishability_score(X_orig, X_synth):
     return 1 - abs(auc - 0.5) * 2
 
 
-# Get numeric grading for synthetic data
-def get_optimization_score():
-    #Compute a single 0-100 score comparing synthetic to original
-    df_orig = pd.read_csv(ORIGINAL_PATH)
-    df_synth = pd.read_csv(SYNTHETIC_PATH)
+# Get a simple 0-100 score on the synthetic data compared to the original
+def get_optimization_score(df, sf):
+    df_orig = df
+    df_synth = sf
 
     setup_column_info(df_orig)
     num_cols, bin_cols, cat_cols = get_column_info()
 
-    # --- (1) Distribution fidelity
+    # distribution fidelity
     dist_score = column_distribution_score(df_orig, df_synth, num_cols, cat_cols)
 
-    # --- (2) Correlation fidelity
+    # correlation fidelity
     corr_score = correlation_score(df_orig, df_synth, num_cols)
 
-    # --- (3) Indistinguishability
+    # indistinguishability
     usable_cols = num_cols + bin_cols
     scaler = StandardScaler()
     X_orig = scaler.fit_transform(df_orig[usable_cols].dropna())
     X_synth = scaler.transform(df_synth[usable_cols].dropna())
     indist_score = indistinguishability_score(X_orig, X_synth)
 
-    # Weighted final score
+    # final score
     final_score = 100 * (0.7 * dist_score + 0.3 * corr_score + 0.0 * indist_score)
     print(f"Scores → Dist: {dist_score:.3f}, Corr: {corr_score:.3f}, Indist: {indist_score:.3f}, Final: {final_score:.2f}")
     return final_score

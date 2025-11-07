@@ -19,5 +19,5 @@ def run(config):
 
 if __name__ == "__main__":
     evaluator = Evaluator.create(run, method="thread")
-    search = CBO(problem, evaluator)
+    search = CBO(problem, evaluator, log_dir=None)
     results = search.search(max_evals=30)
