@@ -18,7 +18,7 @@ _COLUMN_INFO = {
 }
 
 def setup_column_info(df):
-    """Identify and store column types from the original dataset."""
+    #Identify and store column types from the original dataset
     global _COLUMN_INFO
     if _COLUMN_INFO['initialized']:
         return
@@ -40,6 +40,19 @@ def get_column_info():
         raise RuntimeError("Column info not initialized. Call setup_column_info(df_orig) first.")
     return _COLUMN_INFO['numerical_cols'], _COLUMN_INFO['binary_cols'], _COLUMN_INFO['categorical_cols']
 
+def test_privacy(X_orig_proc, X_synth_proc):
+    #Calculates the minimum Nearest Neighbor distance.
+    print("\n\n--- Running Test 2: Privacy (Req. #2) ---")
+    nn = NearestNeighbors(n_neighbors=1, algorithm='kd_tree', metric='euclidean').fit(X_orig_proc)
+    distances, _ = nn.kneighbors(X_synth_proc)
+    min_distance = distances.min()
+
+    #print(f"Minimum Nearest Neighbor Distance: {min_distance:.6f}")
+
+    if min_distance > 1e-6:
+        return True
+    else:
+        return False
 
 # Fidelity of the distribution of the synthetic data
 def column_distribution_score(df_orig, df_synth, num_cols, cat_cols):
@@ -68,6 +81,11 @@ def correlation_score(df_orig, df_synth, num_cols):
 # Distinguishibility testing, ie, can a model accurately predict if the data is synthetic
 # Closer the model's guesses get to 50/50 guesses, the higher the score
 def indistinguishability_score(X_orig, X_synth):
+    #print(np.mean(X_orig, axis=0))
+    #print(np.mean(X_synth, axis=0))
+    #print(np.std(X_orig, axis=0))
+    #print(np.std(X_synth, axis=0))
+
     n = min(len(X_orig), len(X_synth))
     X_orig, X_synth = X_orig[:n], X_synth[:n]
 
@@ -75,7 +93,7 @@ def indistinguishability_score(X_orig, X_synth):
     y = np.array([0]*n + [1]*n)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X_comb, y, test_size=0.3, stratify=y, random_state=42
+        X_comb, y, test_size=0.1, stratify=y, random_state=42
     )
 
     clf = RandomForestClassifier(n_estimators=40, max_depth=5, min_samples_leaf=15, random_state=42)
@@ -83,9 +101,7 @@ def indistinguishability_score(X_orig, X_synth):
     y_pred = clf.predict_proba(X_test)[:, 1]
 
     auc = roc_auc_score(y_test, y_pred)
-    print(f'auc is {auc}')
     return 1 - abs(auc - 0.5) * 2
-
 
 # Get a simple 0-100 score on the synthetic data compared to the original
 def get_optimization_score(df, sf):
@@ -102,16 +118,9 @@ def get_optimization_score(df, sf):
     corr_score = correlation_score(df_orig, df_synth, num_cols)
 
     # indistinguishability
-    usable_cols = num_cols + bin_cols
-    scaler = StandardScaler()
-    X_orig = scaler.fit_transform(df_orig[usable_cols].dropna())
-    X_synth = scaler.transform(df_synth[usable_cols].dropna())
-    indist_score = indistinguishability_score(X_orig, X_synth)
+    indist_score = indistinguishability_score(df_orig, df_synth)
 
     # final score
-    final_score = 100 * (0.7 * dist_score + 0.3 * corr_score + 0.0 * indist_score)
+    final_score = 100 * (0.3 * dist_score + 0.3 * corr_score + 0.4 * indist_score)
     print(f"Scores → Dist: {dist_score:.3f}, Corr: {corr_score:.3f}, Indist: {indist_score:.3f}, Final: {final_score:.2f}")
     return final_score
-
-if __name__ == "__main__":
-    get_optimization_score()

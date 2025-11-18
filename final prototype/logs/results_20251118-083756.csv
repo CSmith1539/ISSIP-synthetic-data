@@ -1,0 +1,2 @@
+p:EPOCHS,p:LATENT_DIM,p:kl_weight,objective,job_id,m:timestamp_submit,m:timestamp_gather
+58,24,8.944731219013805e-06,30.0,0,0.016403913497924805,26.90183973312378

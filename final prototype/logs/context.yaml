@@ -1,5 +1,5 @@
 calls:
-- max_evals: 30
+- max_evals: 40
   timeout: null
 search:
   acq_func: UCBd
@@ -35,20 +35,20 @@ search:
       q: null
       type: uniform_int
       upper: 100
-    - default: 14
+    - default: 33
       log: false
-      lower: 4
+      lower: 2
       name: LATENT_DIM
       q: null
       type: uniform_int
-      upper: 24
-    - default: 0.0255
-      log: false
-      lower: 0.001
+      upper: 64
+    - default: 0.001
+      log: true
+      lower: 1.0e-05
       name: kl_weight
       q: null
       type: uniform_float
-      upper: 0.05
+      upper: 0.1
     json_format_version: 0.4
     python_module_version: 0.6.1
   random_state: null

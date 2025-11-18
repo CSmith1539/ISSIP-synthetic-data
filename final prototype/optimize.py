@@ -7,13 +7,14 @@ from vae import generate_data
 from scoring import get_optimization_score
 
 problem = HpProblem()
-problem.add_hyperparameter((4, 24), "LATENT_DIM")
+problem.add_hyperparameter((2, 64), "LATENT_DIM")
 problem.add_hyperparameter((10, 100), "EPOCHS")
-problem.add_hyperparameter((0.001, 0.05), "kl_weight")
+problem.add_hyperparameter((0.00001, 0.1, "log-uniform"), "kl_weight")
 
 g_df = None
 g_sf = None
 g_one_hot = None
+g_n_samples = None
 
 def run(config):
     global g_df
@@ -21,24 +22,24 @@ def run(config):
     global g_one_hot
 
     print(f'New test:')
-    g_sf = generate_data(g_df, g_one_hot, **config)
+    g_sf = generate_data(g_df, g_one_hot, g_n_samples, **config)
     score = get_optimization_score(g_df, g_sf)
     print()
     return score
 
-def run_optimizer(df, one_hot, evals=30):
+def run_optimizer(df, one_hot, evals=30, n_samples=1000):
     global g_df
     global g_sf
     global g_one_hot
+    global g_n_samples
 
     g_df = df
     g_one_hot = one_hot
+    g_n_samples = n_samples
 
     evaluator = Evaluator.create(run, method="thread")
-    search = CBO(problem, evaluator, log_dor="./logs")
+    search = CBO(problem, evaluator, log_dir="./logs")
     results = search.search(max_evals=evals)
-
-    print(g_sf)
 
     return g_sf
 
