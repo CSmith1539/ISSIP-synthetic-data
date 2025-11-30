@@ -1,0 +1,16 @@
+# Number of optimization iterations / hyperparameter search passes
+optimization_passes: 10
+
+# Number of synthetic samples to generate
+sample_size: 1000
+
+# Target columns (can be a string for single output or a list for multiple)
+target_columns:
+  - Paddy yield(in Kg)
+  - Trash(in bundles)
+
+# Path to original dataset CSV
+path_to_data: "data/paddydataset.csv"
+
+# Path to save synthetic data
+synthetic_data_path: "output/synthetic_data.csv"

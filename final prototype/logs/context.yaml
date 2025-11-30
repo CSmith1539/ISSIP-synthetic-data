@@ -1,5 +1,5 @@
 calls:
-- max_evals: 40
+- max_evals: 10
   timeout: null
 search:
   acq_func: UCBd
@@ -35,13 +35,13 @@ search:
       q: null
       type: uniform_int
       upper: 100
-    - default: 33
+    - default: 20
       log: false
-      lower: 2
+      lower: 8
       name: LATENT_DIM
       q: null
       type: uniform_int
-      upper: 64
+      upper: 32
     - default: 0.001
       log: true
       lower: 1.0e-05

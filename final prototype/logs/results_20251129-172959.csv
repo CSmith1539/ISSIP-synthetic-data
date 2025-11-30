@@ -1,0 +1,2 @@
+p:LATENT_DIM,p:kl_weight,objective,job_id,m:timestamp_submit,m:timestamp_gather
+16,0.015125834542309992,-151.8916052941649,0,0.010980606079101562,9.663037538528442
