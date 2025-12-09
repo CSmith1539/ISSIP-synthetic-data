@@ -32,7 +32,10 @@ Use config.yaml to configure surrounding settings such as iterations, path to da
 Notably, the project needs a target column(s) input, which it will train a model to predict as a method of testing utility of synthetic data.
 
 Once configured, run (as administrator if needed)
-> docker run --rm synth-docker
+> docker run -v ./output:/output --rm synth-docker
+
+To save the output when running in docker, the output directory is mounted by default to /output in the docker image, configure the synthetic data to write to that directory
+Depending on operating system you may have to make slight changes to the format for the path being mounted to.
 
 Currently, the projecr is set up to use a sample dataset, which can be used as an example for setup.
 
